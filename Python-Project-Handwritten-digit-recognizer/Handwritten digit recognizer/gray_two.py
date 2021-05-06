@@ -16,11 +16,6 @@ y_train = pickle.load(open("y_train.pickle", "rb"))
 X_test = pickle.load(open("X_test.pickle", "rb"))
 y_test = pickle.load(open("y_test.pickle", "rb"))
 
-'''X_train=np.array(X_train/255.0)
-y_train=np.array(y_train)
-X_test=np.array(X_test/255.0)
-y_test=np.array(y_test)'''
-
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
@@ -31,9 +26,7 @@ print("y_test shape:", y_test.shape)
 
 # Normalizing the data
 X_train=X_train/255.0
-#y_train=y_train
 X_test=X_test/255.0
-#y_test=y_test
 
 # OUR model
 batch_size = 128
