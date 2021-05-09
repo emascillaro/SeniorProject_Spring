@@ -20,13 +20,11 @@ class Page(tk.Tk):
 
         self.frames = {}
 
-        for F in (StartPage, SolutionPage):
+        frame = StartPage(container, self)
 
-            frame = StartPage(container, self)
+        self.frames[StartPage] = frame
 
-            self.frames[StartPage] = frame
-
-            frame.grid(row = 0, column = 0, sticky = "nsew")
+        frame.grid(row = 0, column = 0, sticky = "nsew")
 
         self.show_frame(StartPage)
 
@@ -40,16 +38,16 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
+        # Start of Our Code #
+
         width, height = 800, 600
         cap = cv2.VideoCapture(0)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
-        #root = Tk()
-        #root.bind('<Escape>', lambda e: root.quit())
-        #lmain = Label(root)
-        lmain = Label(app)
+        lmain = Label(app)  #fix
         lmain.pack()
+
 
         def show_image_frame():
             ret, frame = cap.read()
@@ -57,11 +55,9 @@ class StartPage(tk.Frame):
                 cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
                 img = PIL.Image.fromarray(cv2image)
                 imgtk = ImageTk.PhotoImage(image=img)
-                lmain.imgtk.PhotoImage = imgtk
+                lmain.imgtk = imgtk
                 lmain.configure(image=imgtk)
                 lmain.after(10, show_image_frame)
-                lmain.pack()
-        show_image_frame()
 
         def capture_image():
             videoCaptureObject = cv2.VideoCapture(0)
@@ -72,6 +68,12 @@ class StartPage(tk.Frame):
         image_capture = tk.Button(text="Take Picture", command = capture_image)
         image_capture.pack()
 
+        print("Opening Application")
+
+        show_image_frame()
+        root.mainloop()
+
+'''
         switch_page = tk.Button(text = "View the solution", command = lambda: controller.show_frame(SolutionPage))
         switch_page.pack()
 
@@ -84,6 +86,8 @@ class SolutionPage(tk.Frame):
 
         return_button = tk.Button(self, text = "Take another Photo", command = lambda: controller.show_frame(StartPage))
         return_button.pack()
+
+'''
 
 app = Page()
 app.mainloop()
