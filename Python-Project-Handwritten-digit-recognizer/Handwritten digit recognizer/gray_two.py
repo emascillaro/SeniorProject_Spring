@@ -9,6 +9,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import LeakyReLU
+from sklearn.metrics import precision_score 
 
 
 X_train = pickle.load(open("X_train.pickle", "rb"))
@@ -18,6 +19,8 @@ y_test = pickle.load(open("y_test.pickle", "rb"))
 
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
+y_train = y_train.reshape(-1,1)
+y_test = y_test.reshape(-1,1)
 
 print("X_train shape:", X_train.shape)
 print("y_train shape:", y_train.shape)
@@ -80,6 +83,14 @@ print("The model has successfully trained")
 score = model.evaluate(X_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+# prediction = model.predict(X_test) 
+# np.argmax(prediction, axis=1)
+# prediction.reshape(-1,1)
+# print(prediction.shape)
+
+# Print the precision and recall, among other metrics
+# precision_score(y_test, prediction, average = 'weighted')
 
 model.save('gray_model.h5')
 print("Model is saved as gray_model.h5")
