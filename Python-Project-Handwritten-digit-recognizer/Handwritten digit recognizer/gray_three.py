@@ -9,12 +9,14 @@ from PIL import Image, ImageOps, ImageChops
 
 import bound_box
 
-CATEGORIES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+CATEGORIES_digit = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+CATEGORIES_operator = ["+", "-", "*", "/"]
 
 # Calling bound_box function 
-bound_box.box()
+box_heights = bound_box.box()
 prepared_img_list = []
-final_predict_list = []
+final_predict_string = ""
+#final_predict_list = []
 
 # (BEST PREPARE METHOD TO USE)
 # Formatting image for model 
@@ -32,7 +34,8 @@ def prepare(path):
         print(str(e))
 
 # Compile model
-model = tf.keras.models.load_model('gray_model.h5', compile = True)
+model_digit = tf.keras.models.load_model('gray_model.h5', compile = True)
+model_operator = tf.keras.models.load_model('gray_operators_model.h5', compile = True)  
 
 # Switch directory to folder with boxed images from box()
 directory = r'final_images'
@@ -47,23 +50,55 @@ for filename in os.listdir(directory):
         count += 1
         prepared_image = prepare(f)
         prepared_img_list.append(prepared_image)
-    
 
-# Iterate through image array list and predict each image 
+# Iterate through ordered image array list (left to right just like we read math) and predict each image
+# Depending on height of orignal boxed image, we either use digit model or operator model 
 # Add image prediction to another empty list 
+h_count = 0
 for i in prepared_img_list:
-    prediction = model.predict(i) 
-    pred_name = CATEGORIES[np.argmax(prediction)]
-    final_predict_list.append(pred_name)
-    #print("Model's Prediction:", pred_name)
+    if box_heights[h_count] <= 45:
+        prediction = model_operator.predict(i) 
+        pred_name = CATEGORIES_operator[np.argmax(prediction)]
+        final_predict_string += pred_name
+        #final_predict_list.append(pred_name)
+        print("Model's Prediction:", pred_name)
+        h_count += 1
+    else:
+        prediction = model_digit.predict(i) 
+        pred_name = CATEGORIES_digit[np.argmax(prediction)]
+        final_predict_string += pred_name
+        #final_predict_list.append(pred_name)
+        print("Model's Prediction:", pred_name)
+        h_count += 1
 
-# Convert String List to Integer List 
-final_predict_list = [int(i) for i in final_predict_list]
+print(final_predict_string)
+
+import solution_window
+
+'''
+
+
 print(final_predict_list)
+#print(final_predict_string)
+#numeric(final_predict_string)
 
 # Remove ALL image files from folder 
 for filename in os.listdir(directory):
    os.remove(os.path.join(directory, filename))
+
+'''
+
+'''
+# Convert String List to Integer List               #SOMETHING IS REALLY WRONG WITH THIS
+for i in final_predict_list:
+    if i == "+":
+        final_predict_list.append(i)
+    else:
+        final_predict_list = [int(i) for i in final_predict_list]
+print(final_predict_list)
+'''
+
+
 
 '''
 CATEGORIES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
