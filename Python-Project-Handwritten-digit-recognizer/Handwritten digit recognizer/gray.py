@@ -7,10 +7,10 @@ import pickle
 from PIL import Image, ImageOps
 
 # Directories and Categories for MNIST jpg dataset 
+
 DATADIR = r"MNIST_Dataset_JPG_format\MNIST_JPG_training"
 DATADIR_TEST = r"MNIST_Dataset_JPG_format\MNIST_JPG_testing"
-CATEGORIES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
-
+CATEGORIES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]   # names of photo files
 
 for category in CATEGORIES:
   path = os.path.join(DATADIR, category)  # path to training data
@@ -38,7 +38,7 @@ def create_training_data():
 
 def create_testing_data():
     for category in CATEGORIES:
-        path_test = os.path.join(DATADIR_TEST, category)  # path to training data
+        path_test = os.path.join(DATADIR_TEST, category)  # path to testing data
         class_num = CATEGORIES.index(category)
         for img in os.listdir(path_test):
           try:
