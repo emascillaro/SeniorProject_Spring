@@ -49,6 +49,26 @@ model.add(LeakyReLU(alpha=0.3))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
+model.compile(loss="sparse_categorical_crossentropy", optimizer= 'adam', metrics=['accuracy'])
+
+hist = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(X_test, y_test))
+print("The model has successfully trained")
+
+score = model.evaluate(X_test, y_test, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+
+# prediction = model.predict(X_test) 
+# np.argmax(prediction, axis=1)
+# prediction.reshape(-1,1)
+# print(prediction.shape)
+
+# Print the precision and recall, among other metrics
+# precision_score(y_test, prediction, average = 'weighted')
+
+model.save('gray_model.h5')
+print("Model is saved as gray_model.h5")
+
 '''
 #Online Model
 
@@ -74,23 +94,3 @@ model.add(Flatten())
 model.add(Dense(256))
 model.add(LeakyReLU(alpha=leaky_relu_alpha))
 model.add(Dense(no_classes, activation='softmax'))'''
-
-model.compile(loss="sparse_categorical_crossentropy", optimizer= 'adam', metrics=['accuracy'])
-
-hist = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(X_test, y_test))
-print("The model has successfully trained")
-
-score = model.evaluate(X_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-
-# prediction = model.predict(X_test) 
-# np.argmax(prediction, axis=1)
-# prediction.reshape(-1,1)
-# print(prediction.shape)
-
-# Print the precision and recall, among other metrics
-# precision_score(y_test, prediction, average = 'weighted')
-
-model.save('gray_model.h5')
-print("Model is saved as gray_model.h5")
