@@ -1,0 +1,106 @@
+header {
+  font-family: 'Inria Serif';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inria Serif';
+  background-color: rgb(131, 153, 88);
+}
+
+/* Title Section */
+.title {
+  background-color:rgb(26, 86, 102);
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title h1 {
+  color:rgb(211, 150, 140);
+  font-weight: bold;
+  font-size: 48px;
+}
+
+/* Camera Section */
+.camera {
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  flex-direction: column;
+}
+
+.camera video {
+  border-radius: 20px;
+}
+
+.camera .photo-button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.camera .circle {
+  align-items: center;  
+
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-top: -100px;
+  background-color: rgb(26, 86, 102);
+  opacity: 0;
+}
+.camera .ring {
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: -76px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb(26, 86, 102);
+  opacity: 0.8;
+}
+.camera .photo-button .circle, .camera .photo-button .ring {
+  transition: all 1s;
+}
+.camera .photo-button:hover .circle {
+  opacity: 1;
+}
+.camera .photo-button:active .ring {
+  transition: ease-in-out;
+  border-color: rgb(211, 150, 140);
+  opacity: 1;
+}
+.camera .photo-button:active .circle {
+  transition: ease-in-out;
+  background-color: rgb(211, 150, 140);
+  opacity: 0.5;
+}
+
+
+
+
+/* Result Section */
+.result {
+
+}
+
+/* Detected Expression Section */
+.expressionDetected {
+
+}
+
+/* Solution Section */
+.solution {
+  
+}
