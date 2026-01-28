@@ -76,11 +76,7 @@ body {
 .camera .photo-button:hover .circle {
   opacity: 1;
 }
-.camera .photo-button:active .ring {
-  transition: ease-in-out;
-  border-color: rgb(211, 150, 140);
-  opacity: 1;
-}
+
 .camera .photo-button:active .circle {
   transition: ease-in-out;
   background-color: rgb(211, 150, 140);
