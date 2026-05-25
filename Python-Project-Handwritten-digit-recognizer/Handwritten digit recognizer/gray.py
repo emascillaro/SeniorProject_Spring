@@ -1,3 +1,5 @@
+# This file loads training and testing data for digits, converts from image files to arrays, shuffles the datasets, and saves the datasets using pickle
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -7,11 +9,13 @@ import pickle
 from PIL import Image, ImageOps
 
 # Directories and Categories for MNIST jpg dataset 
-
 DATADIR = r"MNIST_Dataset_JPG_format\MNIST_JPG_training"
 DATADIR_TEST = r"MNIST_Dataset_JPG_format\MNIST_JPG_testing"
 CATEGORIES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]   # names of photo files
 
+'''
+# Print one image from training data
+# ** Does this run once on first image and then break out of the for loop?
 for category in CATEGORIES:
   path = os.path.join(DATADIR, category)  # path to training data
   for img in os.listdir(path):
@@ -21,6 +25,8 @@ for category in CATEGORIES:
     break
   break
 
+'''
+  
 # Empty lists for training and testing data
 training_data = []
 testing_data = []
@@ -28,7 +34,7 @@ testing_data = []
 def create_training_data():
     for category in CATEGORIES:
         path_train = os.path.join(DATADIR, category)  # path to training data
-        class_num = CATEGORIES.index(category)  
+        class_num = CATEGORIES.index(category)
         for img in os.listdir(path_train):      #iterate through images in their path, convert to grayscale
           try:
             img_array = cv2.imread(os.path.join(path_train,img), cv2.IMREAD_GRAYSCALE) # array of pixel values from image

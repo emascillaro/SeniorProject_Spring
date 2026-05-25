@@ -1,3 +1,5 @@
+# This file loads training and testing data for operators, converts from image files to arrays, shuffles the datasets, and saves the datasets using pickle
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os

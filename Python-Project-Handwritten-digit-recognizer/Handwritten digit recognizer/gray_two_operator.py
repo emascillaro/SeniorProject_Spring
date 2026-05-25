@@ -1,3 +1,5 @@
+# This file loads the training and testing data for operators, normalizes the data, defines and builds the model, and evaluates it
+
 import tensorflow as tf;
 import numpy as np
 import pickle
