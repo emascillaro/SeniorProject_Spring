@@ -1,4 +1,4 @@
-# This file loads training and testing data for digits, converts from image files to arrays, shuffles the datasets, and saves the datasets using pickle
+# This file preprocesses digits data: loads training and testing data for digits, converts from image files to arrays, shuffles the datasets, and saves the datasets using pickle
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,20 +13,7 @@ DATADIR = r"MNIST_Dataset_JPG_format\MNIST_JPG_training"
 DATADIR_TEST = r"MNIST_Dataset_JPG_format\MNIST_JPG_testing"
 CATEGORIES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]   # names of photo files
 
-'''
-# Print one image from training data
-# ** Does this run once on first image and then break out of the for loop?
-for category in CATEGORIES:
-  path = os.path.join(DATADIR, category)  # path to training data
-  for img in os.listdir(path):
-    img_array = cv2.imread(os.path.join(path,img))
-    plt.imshow(img_array)
-    plt.show()
-    break
-  break
-
-'''
-  
+ 
 # Empty lists for training and testing data
 training_data = []
 testing_data = []

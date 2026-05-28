@@ -13,7 +13,6 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import LeakyReLU
 from sklearn.metrics import precision_score 
 
-
 X_train = pickle.load(open("X_train.pickle", "rb"))
 y_train = pickle.load(open("y_train.pickle", "rb"))
 X_test = pickle.load(open("X_test.pickle", "rb"))
@@ -54,45 +53,11 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss="sparse_categorical_crossentropy", optimizer= 'adam', metrics=['accuracy'])
 
 hist = model.fit(X_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(X_test, y_test))
-print("The model has successfully trained")
+# print("The model has successfully trained")
 
 score = model.evaluate(X_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-
-# prediction = model.predict(X_test) 
-# np.argmax(prediction, axis=1)
-# prediction.reshape(-1,1)
-# print(prediction.shape)
-
-# Print the precision and recall, among other metrics
-# precision_score(y_test, prediction, average = 'weighted')
+# print('Test loss:', score[0])
+# print('Test accuracy:', score[1])
 
 model.save('gray_model.h5')
-print("Model is saved as gray_model.h5")
-
-'''
-#Online Model
-
-img_width, img_height = 28, 28
-batch_size = 250
-epochs = 5
-no_classes = 10
-validation_split = 0.2
-verbosity = 1
-leaky_relu_alpha = 0.1
-
-# Create the model
-model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3), input_shape=(28,28,1)))
-model.add(LeakyReLU(alpha=leaky_relu_alpha))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Conv2D(64, kernel_size=(3, 3)))
-model.add(LeakyReLU(alpha=leaky_relu_alpha))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
-model.add(Flatten())
-model.add(Dense(256))
-model.add(LeakyReLU(alpha=leaky_relu_alpha))
-model.add(Dense(no_classes, activation='softmax'))'''
+# print("Model is saved as gray_model.h5")
