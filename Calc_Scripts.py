@@ -1,7 +1,5 @@
 import numpy
 
-#from otherCode import equationString
-
 def calculation(equationString):
 
     if '+' in equationString:
